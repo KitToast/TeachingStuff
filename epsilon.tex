@@ -1,0 +1,91 @@
+\documentclass[12pt]{article}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\parindent}{0in}
+\setlength{\parskip}{\baselineskip}
+
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{amsthm}
+\usepackage{subfiles}
+
+
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+\title{More about $\delta,\epsilon$ proofs}
+
+\begin{document}
+\maketitle
+
+
+
+
+I wanted to write about additional $\epsilon,\delta$ applicatons since they can be confusing at times. Recall this question:
+
+Question: For function $f(x) = x^2$ when $x$ is rational and 0 if $x$ is irrational, prove that $\lim_{x \rightarrow 0}f(x) = 0$
+
+Solution: For some $\epsilon > 0$ arbitrarily small, bound the distance of $f(x)$ from its limit point by $\epsilon$. In other words, let $|f(x) - 0| = |f(x)| < \epsilon$ Since $f(x) \leq 0$ for all $x \in (-\infty,\infty)$, $f(x) \geq 0 $, we can just say $f(x) < \epsilon$ by removing the need for an absolute value. Now, we must find some $\delta$ such that if $x \in (0-\delta,0+\delta)$ or $x \in (-\delta,\delta)$, then $f(x) < \epsilon$. We can take this by cases: \par
+${\bf Case 1:}$ If $x$ is rational, then, by our assumption above, $x^2 < \epsilon$ or $x < \sqrt{\epsilon}$. Thus, taking $\delta = \sqrt{\epsilon}$ will suffice. \par
+${\bf Case 2}$ If $x$ is irrational, then $x = 0$. However, we stated above that $\epsilon > 0 $, thus $ 0 <\epsilon$. and taking $\delta = \epsilon$ will suffice. \par
+Thus, $\delta = \min\{\epsilon,\sqrt{\epsilon}\}$ will work.
+
+
+We see that we can bound the domain by some arbitrarily small number $\epsilon$ as desired.
+\newpage
+
+The domain does not necessarily bound by an interval as exemplified by the following example:
+
+Question: Prove that $\lim_{x \rightarrow \infty} \frac{1}{x} = 0$ \par
+
+Solution: Suppose we bound $|f(x) - L| < \epsilon$ as usual. In this case, this expression would become $|\frac{1}{x} -0| = |\frac{1}{x}|  < \epsilon$
+However, we see from this expression that a good $\delta$ would be greater than $\frac{1}{\epsilon}$. Why would it? Well, let's check it manually, $x \geq \frac{1}{\epsilon}$
+
+ $$|\frac{1}{x} - 0| < |\frac{1}{\frac{1}{\epsilon}} - 0| < \epsilon$$
+  
+ How abouth $\lim_{x \rightarrow 0} \frac{1}{x}?$ We know that this ``blows-up'' as $x \rightarrow 0$. More formally, $\frac{1}{x}\rightarrow \infty$ as $x \rightarrow 0$. Let us prove that this DOES NOT have a limit.
+ 
+ 
+ Assume that we try to claim that $\lim_{x \rightarrow 0} \frac{1}{x} = L$ for some $L < \infty$ (finite). Then for any $\delta > 0$ such that $|x - 0| < \delta$, there must exist some $\epsilon$ such that $|\frac{1}{x} - L | < \epsilon$, 
+ However, take $x_e< \frac{1}{L + \epsilon}$. We can do this since $x < \delta$ allows us to take arbitrarily small values. Then we immediately see that $|\frac{1}{\frac{1}{1 + \epsilon}} - L|  = |L+ \epsilon - L | = \epsilon \not< \epsilon$. Thus, no such $L$ can be the limit and the function does not have a limit value when $x \rightarrow 0$. 
+  
+Let's try something a bit more difficult:
+Question: Prove that $$ \lim_{x \rightarrow 0^+} \sqrt{x} \cdot e^{\sin(\frac{\pi}{x})} = 0 $$
+ 
+Solution: Let us bound the domain by some small number $\delta$ from the right such that $x \in (0,0+\delta)$ or $x < \delta$. By this inequality, we can bound the expression above as follows:
+$$ \sqrt{x} \cdot e^{\sin(\frac{\pi}{x})} < \sqrt{\delta} \cdot e^{\sin(\frac{\pi}{x})} $$
+
+Remember that the square root function is a monotonically increasing function, that is: if $x_1 \leq x_2$, then $\sqrt{x_1} \leq \sqrt{x_2}$. Thus, the bound above holds.
+
+If we remember our trigonometry, then we know that $|\sin(\frac{\pi}{x})| \leq 1$. Using this observation, we get an even finer bound:
+$$\sqrt{\delta} \cdot e^{\sin(\frac{\pi}{x})} \leq \sqrt{\delta} \cdot e $$
+
+By definition, we have that $\sqrt{\delta} \cdot e < \epsilon$ for some $\epsilon > 0$.
+
+Looking that this expression ,we see that $\delta = (\frac{\epsilon}{e})^2$ will work as desired. 
+ 
+This method of proof is not merely restricted to specific functions. This method is used heavily in mathematical analysis to prove certain theorems involving convergence. Let us demonstate this by formally proving the squeeze theorem we learned. Let us restate the theorem:
+
+$\bf{Squeeze Theorem:}$ Let $f(x) \leq g(x) \leq h(x)$ when in some neighborhood of $a$ and
+$$\lim_{x \rightarrow a} f(x) = \lim_{x \rightarrow a} h(x) = L$$ Then, $\lim_{x \rightarrow a} g(x) = L$
+ 
+\begin{proof}
+ Let us restrict $|f(x) - L| < \epsilon$ and $|h(x) - L| < \epsilon$. 
+ 
+ Then we have $\delta_1,\delta_2$ such that $|f(x)-a| < \delta_1$ and $|h(x) - a| < \delta_2$
+ 
+ 
+ Then our domain around $a$ will be no more than some $\delta = \min\{\delta_1,\delta_2\}$ by definition so $x \in (a-\delta, a+ \delta)$. Since $f(x),h(x)$ bound $g(x)$ above and below, we arrive at the following inequality:
+
+ $$|g(x) - L| \leq |h(x) - f(x)| \leq |h(x) - L| + |f(x) - L| < 2\epsilon$$
+ 
+ for $|x-a| < \min\{\delta_1,\delta_2\}$.
+
+ Hence, the sqeeze theorem follows as we have formally proven that $\lim_{x \rightarrow a} g(x) = L$.
+ 
+ \end{proof}
+ 
+ 
+\end{document}
+
+
