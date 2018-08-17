@@ -25,7 +25,7 @@ I wanted to write about additional $\epsilon,\delta$ applicatons since they can 
 
 Question: For function $f(x) = x^2$ when $x$ is rational and 0 if $x$ is irrational, prove that $\lim_{x \rightarrow 0}f(x) = 0$
 
-Solution: For some $\epsilon > 0$ arbitrarily small, bound the distance of $f(x)$ from its limit point by $\epsilon$. In other words, let $|f(x) - 0| = |f(x)| < \epsilon$ Since $f(x) \leq 0$ for all $x \in (-\infty,\infty)$, $f(x) \geq 0 $, we can just say $f(x) < \epsilon$ by removing the need for an absolute value. Now, we must find some $\delta$ such that if $x \in (0-\delta,0+\delta)$ or $x \in (-\delta,\delta)$, then $f(x) < \epsilon$. We can take this by cases: \par
+Solution: For some $\epsilon > 0$ arbitrarily small, bound the distance of $f(x)$ from its limit point by $\epsilon$. In other words, let $|f(x) - 0| = |f(x)| < \epsilon$ Since $f(x) \geq 0$ for all $x \in (-\infty,\infty)$, we can just say $f(x) < \epsilon$ by removing the need for an absolute value. Now, we must find some $\delta$ such that if $x \in (0-\delta,0+\delta)$ or $x \in (-\delta,\delta)$, then $f(x) < \epsilon$. We can take this by cases: \par
 ${\bf Case 1:}$ If $x$ is rational, then, by our assumption above, $x^2 < \epsilon$ or $x < \sqrt{\epsilon}$. Thus, taking $\delta = \sqrt{\epsilon}$ will suffice. \par
 ${\bf Case 2}$ If $x$ is irrational, then $x = 0$. However, we stated above that $\epsilon > 0 $, thus $ 0 <\epsilon$. and taking $\delta = \epsilon$ will suffice. \par
 Thus, $\delta = \min\{\epsilon,\sqrt{\epsilon}\}$ will work.
